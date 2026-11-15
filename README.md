@@ -1,26 +1,27 @@
 # taskly-policy
 
-Taskly の規約本文と、公開時点を固定した版を管理します。表示サイトは [taskly-policy-web](https://github.com/asari194617/taskly-policy-web) です。
+Taskly の規約本文と公開版を GitHub Releases で管理します。表示サイトは [taskly-policy-web](https://github.com/asari194617/taskly-policy-web) です。
 
-## 公開版
+## 正本と表示
 
-`catalog.json` が文書ごとの公開版を指定します。`versions/` 内のファイルは、同意記録や公開履歴との照合に使うため、公開後に編集しません。改訂時は新しい版のファイルを追加し、必要な告知・同意手続きを済ませてから `catalog.json` の `current` を更新します。
+公開済みの通常 Release と pre-release が版の正本です。各 Release tag が固定するコミットの `manifest.json` に、公開版、施行日、文書の順序と改定情報を記録します。`versions/<文書の版>/<slug>.md` は本文の固定版です。Release の tag と manifest の `version`、本文の SHA-256 を公開処理が照合します。draft Release は表示しません。
 
-利用規約・プライバシー・セキュリティの `2026-09-22.1` は、[Taskly の同意記録用アーカイブ](https://github.com/asari194617/taskly/tree/main/docs/legal)からバイト単位でコピーしました。プライバシーの現行公開文は、[Taskly PR #418](https://github.com/asari194617/taskly/pull/418) で公開確認された 2026-09-23 改訂版を `2026-09-23.1` として固定しています。Taskly の同意記録が指す `2026-09-22.1` は旧版として残します。継続性声明の `88536b5` は本リポジトリの同じコミットから固定したものです。継続性声明には発効日が明記されていないため、版 ID は原本のコミット短縮 SHA とし、発効日は推定していません。
+通常 Release のうち施行日が過去で最も新しいものが現行版です。pre-release は改正予定版として別に表示します。各文書の保存版 URL は `/slug/<文書の版>/` を維持します。Release tag を使う `/?v=<tag>` と `/slug/?v=<tag>` でも、版の一覧と該当文書を開けます。
 
-`policies/` は過去からある原文です。同意用アーカイブと内容・整形が異なるため、表示サイトは `catalog.json` で指定した `versions/` を使います。
+`catalog.json` は移行前の管理台帳として残しています。**新しい公開版をこのファイルだけに追加しても公開されません。** 版管理の正本は Release ごとの manifest です。`policies/` は過去からある原文であり、現在の表示本文とは整形が異なります。
 
-## 表示サイトへの公開
+## 既存版の移行
 
-このリポジトリの `main` に本文・`catalog.json` をマージすると、[Publish policy changes](https://github.com/asari194617/taskly-policy/actions/workflows/publish.yml) がそのコミットを取得して R2 に公開します。GitHub Actions の起動・実行時間は必要ですが、15 分間隔の定期確認は待ちません。失敗時や再公開時は同ワークフローを手動実行できます。版の追加・現行版の切り替えに表示アプリのビルドや Worker のデプロイは不要です。
+最初の2つの `-import` Release は、Taskly の同意記録が参照する `2026-09-22.1` と、2026年9月23日改訂のプライバシーポリシーを、本文を変えずに記録します。旧版と現行版のコミットを別々の tag に固定します。移行版だけは既存本文に front matter がないことを許容します。以降の新しい本文には `title` と `description` の front matter を含め、manifest と一致させます。
 
-公開処理は原文の SHA-256 を照合し、公開済みの保存版の変更・削除を拒否します。新しい Markdown を先に置き、カタログを最後に切り替えます。公開に失敗した場合は表示サイトのワークフロー実行ログを確認してください。
+継続性声明 `88536b5` には発効日が明記されていないため、文書ごとの `effectiveDate` は `null` のままにします。Release 自体の施行日と混同しません。
 
-## 改訂時の確認
+## 改訂の手順
 
-1. 法務・運用担当が本文と提供実態を確認し、新しい版と発効日を決めます。
-2. 旧版を残して `versions/NEW_VERSION/` に新しいファイルを追加します。
-3. 告知・再同意が必要な版では、Taskly API と同意画面の版、告知時期を合わせます。
-4. `main` へのマージ後にデータ公開ワークフローを確認し、表示サイトで現行・保存版の URL、Markdown、改定履歴、差分を確認します。
+1. 本文と提供実態、告知・同意の必要性を確認します。
+2. 新しい文書の版を `versions/` に追加します。公開済みファイルは編集しません。`manifest.json` に文書の順序、版、変更有無、SHA-256、Release の施行日を記録します。
+3. PR でレビューし、マージしたコミットへ manifest の `version` と同じ tag を付け、GitHub Release を公開します。改正予定版は pre-release にします。draft は公開されません。
+4. Release 公開イベントを起点に、表示サイトが GitHub 上の Release 一覧と各 tag のコミットSHAを検証し、R2へ版固定の本文と一覧を公開します。イベントが届かなかった場合に備え、定期的にも照合します。Next.js の再ビルドは不要です。
+5. [公開URL](https://policies.taskly.iy0306.com/)で版履歴、本文、Markdown、差分を確認します。
 
-Taskly の同意版番号と現行公開プライバシー版は異なります。新しい版への同意を義務付ける変更は API・告知・同意画面を含む別の審査として扱います。
+GitHub または公開処理が失敗した場合、R2 の直前の正常データを表示し続けます。保存版の変更・削除は公開処理が拒否します。Taskly の同意を必要とする版の切り替えは、Taskly API の同意版、告知、同意画面と同時にレビューします。
