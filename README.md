@@ -12,7 +12,7 @@ Taskly の規約本文と、公開時点を固定した版を管理します。�
 
 ## 表示サイトへの公開
 
-このリポジトリの `main` にマージされた本文と `catalog.json` は、[taskly-policy-web の Publish policy data](https://github.com/asari194617/taskly-policy-web/actions/workflows/publish-data.yml) が 15 分間隔で検証して R2 に公開します。すぐに反映したい場合は同ワークフローを手動実行します。GitHub の定期実行は遅延する場合があるため、公開結果をワークフローと実際の URL で確認してください。版の追加・現行版の切り替えに表示アプリのビルドや Worker のデプロイは不要です。
+このリポジトリの `main` に本文・`catalog.json` をマージすると、[Publish policy changes](https://github.com/asari194617/taskly-policy/actions/workflows/publish.yml) がそのコミットを取得して R2 に公開します。GitHub Actions の起動・実行時間は必要ですが、15 分間隔の定期確認は待ちません。失敗時や再公開時は同ワークフローを手動実行できます。版の追加・現行版の切り替えに表示アプリのビルドや Worker のデプロイは不要です。
 
 公開処理は原文の SHA-256 を照合し、公開済みの保存版の変更・削除を拒否します。新しい Markdown を先に置き、カタログを最後に切り替えます。公開に失敗した場合は表示サイトのワークフロー実行ログを確認してください。
 

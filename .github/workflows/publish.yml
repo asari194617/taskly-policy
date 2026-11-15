@@ -1,0 +1,26 @@
+name: Publish policy changes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - catalog.json
+      - versions/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: policy-source-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    uses: asari194617/taskly-policy-web/.github/workflows/publish-data.yml@main
+    with:
+      source_ref: ${{ github.sha }}
+    secrets:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
