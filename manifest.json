@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "version": "v2026-09-22.1-import",
+  "status": "current",
+  "publishedAt": "2026-11-15T12:57:00Z",
+  "effectiveAt": "2026-09-22T00:00:00+09:00",
+  "policies": [
+    {
+      "slug": "terms",
+      "path": "versions/2026-09-22.1/terms.md",
+      "title": "利用規約",
+      "description": "Tasklyの利用条件を定めます。",
+      "revision": "2026-09-22.1",
+      "changed": true,
+      "effectiveDate": "2026-09-22",
+      "sha256": "688178ab0fac56e973747d16168313c2bb7b998e6a3fd9c3527d46fa72f4046d"
+    },
+    {
+      "slug": "privacy",
+      "path": "versions/2026-09-22.1/privacy.md",
+      "title": "プライバシーポリシー",
+      "description": "個人情報の取扱いを説明します。",
+      "revision": "2026-09-22.1",
+      "changed": true,
+      "effectiveDate": "2026-09-22",
+      "sha256": "05d950de9df6e88fea9810d6d4c3e5d61167d963fa5e68a1c8fc8c0fad6ae46a"
+    },
+    {
+      "slug": "security",
+      "path": "versions/2026-09-22.1/security.md",
+      "title": "セキュリティポリシー",
+      "description": "安全管理の方針を説明します。",
+      "revision": "2026-09-22.1",
+      "changed": true,
+      "effectiveDate": "2026-09-22",
+      "sha256": "2bcb886a3902897d5fbf57ff0fd2de1c3346fc4172cc85974e75b5d2727f3b5e"
+    }
+  ]
+}
