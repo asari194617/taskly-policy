@@ -1,11 +1,10 @@
 name: Publish policy changes
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - catalog.json
-      - versions/**
+  release:
+    types: [published, released, prereleased, edited]
+  schedule:
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -19,7 +18,7 @@ jobs:
   publish:
     uses: asari194617/taskly-policy-web/.github/workflows/publish-data.yml@main
     with:
-      source_ref: ${{ github.sha }}
+      source_ref: main
     secrets:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
