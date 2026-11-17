@@ -1,39 +1,39 @@
 {
   "schemaVersion": 1,
-  "version": "v2026-09-23.1-import",
+  "version": "v2026-11-16.1",
   "status": "current",
-  "publishedAt": "2026-11-15T12:58:00Z",
-  "effectiveAt": "2026-09-23T00:00:00+09:00",
+  "publishedAt": "2026-11-17T01:49:44Z",
+  "effectiveAt": "2026-11-16T00:00:00+09:00",
   "policies": [
     {
       "slug": "terms",
-      "path": "versions/2026-09-22.1/terms.md",
+      "path": "versions/2026-11-16.1/terms.md",
       "title": "利用規約",
-      "description": "Tasklyの利用条件を定めます。",
-      "revision": "2026-09-22.1",
-      "changed": false,
-      "effectiveDate": "2026-09-22",
-      "sha256": "688178ab0fac56e973747d16168313c2bb7b998e6a3fd9c3527d46fa72f4046d"
+      "description": "Tasklyが提供する各サービスに共通する利用条件を定めます。",
+      "revision": "2026-11-16.1",
+      "changed": true,
+      "effectiveDate": "2026-11-16",
+      "sha256": "b3fac8c65eed727615fcfb61c34dcad1e143f92f3b5ad48918a3355003841b0e"
     },
     {
       "slug": "privacy",
-      "path": "versions/2026-09-23.1/privacy.md",
+      "path": "versions/2026-11-16.1/privacy.md",
       "title": "プライバシーポリシー",
-      "description": "個人情報の取扱いを説明します。",
-      "revision": "2026-09-23.1",
+      "description": "Tasklyが提供する各サービスでの個人情報の取扱いを説明します。",
+      "revision": "2026-11-16.1",
       "changed": true,
-      "revisionDate": "2026-09-23",
-      "sha256": "e3b3b0905014cbba0d8a754e0d645a08418c97c8bb3f47aabc23f7f58e1144a9"
+      "effectiveDate": "2026-11-16",
+      "sha256": "6c7c19ee2af1cd600338f313b5b3ea31615e02a30bd38fb97d0ba40c672bd2d8"
     },
     {
       "slug": "security",
-      "path": "versions/2026-09-22.1/security.md",
+      "path": "versions/2026-11-16.1/security.md",
       "title": "セキュリティポリシー",
-      "description": "安全管理の方針を説明します。",
-      "revision": "2026-09-22.1",
-      "changed": false,
-      "effectiveDate": "2026-09-22",
-      "sha256": "2bcb886a3902897d5fbf57ff0fd2de1c3346fc4172cc85974e75b5d2727f3b5e"
+      "description": "Tasklyの各サービスに共通する情報セキュリティの基本方針を定めます。",
+      "revision": "2026-11-16.1",
+      "changed": true,
+      "effectiveDate": "2026-11-16",
+      "sha256": "35a3ae7e2e66aebb987ab18f07a6e6c68f786ecd35f6376745478c60d8839331"
     },
     {
       "slug": "continuity",
@@ -41,7 +41,7 @@
       "title": "サービスの継続性確保に関する声明",
       "description": "長期的な継続性を確保し、サービスの継続性を確保するための基本方針をまとめたものです。",
       "revision": "88536b5",
-      "changed": true,
+      "changed": false,
       "effectiveDate": null,
       "sha256": "1491f2436e15152783df927dd950d46db948cdd02e957898b79526138054798e"
     }
